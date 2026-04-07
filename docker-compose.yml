@@ -1,11 +1,25 @@
+version: "3.9"
+
 services:
   backend:
     build: .
     container_name: backend
+    restart: unless-stopped
+
     ports:
       - "4000:4000"
+
     networks:
       - devops-net
+
+    mem_limit: 512m
+    cpus: 0.5
+
+    logging:
+      driver: "json-file"
+      options:
+        max-size: "10m"
+        max-file: "3"
 
 networks:
   devops-net:
